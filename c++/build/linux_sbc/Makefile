@@ -19,12 +19,14 @@ TARGET1     = $(TARGET).$(MAJ_VERSION)
 TARGET2     = $(TARGET).$(MAJ_VERSION).$(MIN_VERSION)
 TARGET3     = $(TARGET).$(MAJ_VERSION).$(MIN_VERSION).$(REV_VERSION)
 
+TOOLCHAIN_PREFIX = arm-raspbian10-linux-gnueabihf-
+
 CHK_DIR_EXISTS = test -d
 PRINT       = echo
-STRIP       = strip
-AR          = ar
-ARFLAGS     = cr
-LD          = g++
+STRIP       = $(TOOLCHAIN_PREFIX)strip
+AR          = $(TOOLCHAIN_PREFIX)ar
+ARFLAGS     = $(TOOLCHAIN_PREFIX)cr
+LD          = $(TOOLCHAIN_PREFIX)g++
 LDFLAGS     = -shared -fPIC #-Wl,-soname,dxl
 LD_CONFIG   = ldconfig
 CP          = cp
@@ -33,10 +35,10 @@ RM          = rm
 RM_ALL      = rm -rf
 SYMLINK     = ln -s
 MKDIR       = mkdir
-CC          = gcc
-CX          = g++
-CCFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
-CXFLAGS     = -O2 -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC -g
+CC          = $(TOOLCHAIN_PREFIX)gcc
+CX          = $(TOOLCHAIN_PREFIX)g++
+CCFLAGS     = -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC
+CXFLAGS     = -O3 -DLINUX -D_GNU_SOURCE -Wall -c $(INCLUDES) -fPIC
 INCLUDES    += -I$(DIR_DXL)/include/dynamixel_sdk
 
 #---------------------------------------------------------------------
